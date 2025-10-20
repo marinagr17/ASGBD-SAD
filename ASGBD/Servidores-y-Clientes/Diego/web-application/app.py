@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from pymongo import MongoClient
 import os
-import json
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -54,7 +53,7 @@ def login():
     
     return render_template('index.html')
 
-@app.route('/colecciones/<nombre>', methods=['GET', 'POST'])
+@app.route('/colecciones/<nombre>')
 def ver_coleccion(nombre):
 
     usuario = session.get('usuario')
@@ -67,15 +66,7 @@ def ver_coleccion(nombre):
     client = MongoClient(uri, serverSelectionTimeoutMS=2000)
     db = client[MONGODB_DATABASE]
     colecciones = db.list_collection_names()
-
-    documentos = None
-
-    if request.method == 'POST':
-        query_id = request.form.get('id', '')
-        query = json.loads(query_id)
-        documentos = list(db[nombre].find(query))
-    else:
-        documentos = list(db[nombre].find())
+    documentos = list(db[nombre].find())
 
     return render_template(
         'index.html',

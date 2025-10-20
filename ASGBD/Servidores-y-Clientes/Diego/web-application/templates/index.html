@@ -33,17 +33,6 @@
             {% endfor %}
         </ul>
 
-        {% if nombre %}
-            <h3>Colección: {{ nombre }}</h3>
-
-            <form action="{{ url_for('ver_coleccion', nombre=nombre) }}" method="post">
-                <label for="id">Filtrar por ID:</label>
-                <input type="text" name="id" id="id" placeholder='{"_id": valor}'>
-                
-                <button type="submit">Buscar</button>
-            </form>
-        {% endif %}
-
         {% if documentos %}
             <h3>Documentos en la colección: {{ nombre }}</h3>
             <ul>
