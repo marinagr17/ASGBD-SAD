@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}  <!-- Hereda la estructura de base.html -->
 
 {% block title %}Aplicación Web MongoDB{% endblock %}
 
@@ -6,6 +6,7 @@
     <h1>Aplicación Web conectada a MongoDB</h1>
 
     {% if not usuario %}
+        <!-- Si el usuario no ha iniciado sesión, mostramos el formulario -->
         <p>Bienvenido. Por favor, inicia sesión:</p>
 
         <form action="{{ url_for('login') }}" method="post">
@@ -18,14 +19,18 @@
             <button type="submit">Iniciar sesión</button>
         </form>
 
+        <!-- Si hay un mensaje de error (por ejemplo, error de conexión), se muestra -->
         {% if error %}
             <p style="color: #ff0000;">{{ error }}</p>
         {% endif %}
 
     {% else %}
+        <!-- Si el usuario ya inició sesión -->
         <h2>Bienvenido, {{ usuario }}</h2>
+
         <h3>Colecciones disponibles:</h3>
         <ul>
+            <!-- Listamos las colecciones y las enlazamos para ver su contenido -->
             {% for coleccion in colecciones %}
                 <li>
                     <a href="{{ url_for('ver_coleccion', nombre=coleccion) }}">{{ coleccion }}</a>
@@ -34,16 +39,19 @@
         </ul>
 
         {% if documentos %}
+            <!-- Si hay documentos en la colección seleccionada, los mostramos -->
             <h3>Documentos en la colección: {{ nombre }}</h3>
             <ul>
                 {% for doc in documentos %}
                     <li>
+                        <!-- Mostramos el contenido del documento en formato JSON legible -->
                         <pre>{{ doc | tojson(indent=2) }}</pre>
                     </li>
                 {% endfor %}
             </ul>
         {% endif %}
 
+        <!-- Enlace para cerrar sesión -->
         <a href="{{ url_for('logout') }}">Cerrar sesión</a>
     {% endif %}
 {% endblock %}

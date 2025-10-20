@@ -3,20 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Enlazamos el archivo CSS ubicado en la carpeta 'static/css' -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title> <!-- Bloque de título dinámico -->
 </head>
 <body>
+    <!-- Barra de navegación simple -->
     <nav>
         <ul>
             <li>
+                <!-- Enlace a la página principal -->
                 <a href="{{ url_for('index') }}">Inicio</a>
             </li>
             <li>
+                <!-- Enlace a la página de login -->
                 <a href="{{ url_for('login') }}">Login</a>
             </li>
         </ul>
     </nav>
+
+    <!-- Bloque donde se insertará el contenido de cada página hija -->
     {% block content %}
     {% endblock %}
 </body>
