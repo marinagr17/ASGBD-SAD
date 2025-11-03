@@ -1,0 +1,1 @@
+virt-viewer --connect qemu+ssh://debian@172.22.200.33/system win11

